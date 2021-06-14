@@ -1,5 +1,6 @@
 package com.das.starter.controllers;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.das.starter.models.Error;
 import com.das.starter.models.Rating;
-import com.das.starter.services.FetchRatingService;
+import com.das.starter.services.RatingService;
 
 @RestController
 public class MainController {
 	
 	@Autowired
-	FetchRatingService fetchRatingService;
+	RatingService ratingService;
 
 	@GetMapping("/")
 	public String base() {
@@ -45,17 +46,22 @@ public class MainController {
 			System.out.println(projectId);
 		}
 		
-		return fetchRatingService.getRatings(); 
+		return ratingService.getRatings(); 
 	}
 	
-	@PostMapping({"/new"})
+	@PostMapping({"/rating"})
 	public List<Rating> postNew(@RequestBody(required = true) Rating rating)
 	{
 		if(rating != null) {
 			System.out.println(rating.toString());
 		}
 		
-		return fetchRatingService.getRatings(); 
+		long timestamp = Instant.now().getEpochSecond();
+		rating.setId(timestamp);
+		rating.setTimestamp(timestamp);
+		ratingService.saveRating(rating);
+		
+		return ratingService.getRatings(); 
 	}
 		
 }

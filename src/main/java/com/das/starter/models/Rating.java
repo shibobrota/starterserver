@@ -1,16 +1,25 @@
 package com.das.starter.models;
 
-public class Rating {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Rating {
+	
+	@Id
+	long id;
 	int rating;
 	String comment;
-	int timestamp;
+	long timestamp;
 	int projectId;
 	int dataId;
 	int userId;
 	String userName;
 	
-	public Rating(int rating, String comment, int timestamp, int projectId, int dataId, int userId, String userName) {
+
+	public Rating(long id, int rating, String comment, long timestamp, int projectId, int dataId, int userId,
+			String userName) {
+		this.id = id;
 		this.rating = rating;
 		this.comment = comment;
 		this.timestamp = timestamp;
@@ -20,6 +29,18 @@ public class Rating {
 		this.userName = userName;
 	}
 	
+	public Rating() {
+		super();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public int getRating() {
 		return rating;
 	}
@@ -33,10 +54,10 @@ public class Rating {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public int getTimestamp() {
+	public long getTimestamp() {
 		return timestamp;
 	}
-	public void setTimestamp(int timestamp) {
+	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
 	public int getProjectId() {
@@ -63,10 +84,12 @@ public class Rating {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Rating [rating=" + rating + ", comment=" + comment + ", timestamp=" + timestamp + ", projectId="
-				+ projectId + ", dataId=" + dataId + ", userId=" + userId + ", userName=" + userName + "]";
+		return "Rating [id=" + id + ", rating=" + rating + ", comment=" + comment + ", timestamp=" + timestamp
+				+ ", projectId=" + projectId + ", dataId=" + dataId + ", userId=" + userId + ", userName=" + userName
+				+ "]";
 	}
+	
 }
