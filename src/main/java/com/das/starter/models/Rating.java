@@ -2,8 +2,10 @@ package com.das.starter.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "ratings")
 public class Rating {
 	
 	@Id
